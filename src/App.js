@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import "./App.css";
-import TaskList from "./components/TaskList";
-import TaskForm from "./components/TaskForm";
+import { Routes, Route } from "react-router-dom"
+import Home from "./components/Home";
+import About from "./components/About";
+import Contact from "./components/Contact";
+import Nav from "./components/Nav";
 
 function App() {
   const [tasks, setTasks] = useState([
@@ -43,16 +46,21 @@ function App() {
 
   return (
     <div className="App">
-      <main>
-        <h1 className="app-title">My Task Tracker</h1>
-        <h2>Today's Tasks</h2>
-        <TaskForm onAdd={addTask} />
-        <TaskList
-          tasks={tasks}
-          onDeleteTask={deleteTask}
-          onUpdateTask={updateTask}
+      <Nav />
+      <Routes>
+      <Route 
+          path="/" 
+          element={<Home 
+                     tasks={tasks} 
+                     onAdd={addTask} 
+                     onDeleteTask={deleteTask} 
+                     onUpdateTask={updateTask}
+                   />} 
         />
-      </main>
+        <Route path="about" element={ <About/> } />
+        <Route path="contact" element={ <Contact/> } />
+      </Routes>
+      
     </div>
   );
 }
